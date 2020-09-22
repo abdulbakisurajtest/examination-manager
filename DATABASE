@@ -1,0 +1,89 @@
+
+I USED THIS TO CREATE A DATABASE AND TABLES IN MYSQL DATABASE WITH 'question' as username and 'test' as password but this can be subjected to change based on your database username and password
+
+NOTE: username and password use to grant permission in SQL should be the same used in creating PDO for connecting to database.
+NOTE: the port used here was 3306 because I was using xampp for windows machine your server port may vary
+
+------------COPY AND PASTE THE CODE BELOW INTO YOUR SQL-------------
+
+DROP DATABASE IF EXISTS questiontest;
+
+CREATE DATABASE questiontest DEFAULT CHARACTER SET utf8;
+GRANT ALL ON questiontest.* TO 'question' @'localhost' IDENTIFIED BY 'test';
+GRANT ALL ON questiontest.* TO 'question' @'127.0.0.1' IDENTIFIED BY 'test';
+
+USE questiontest;
+
+DROP TABLE IF EXISTS account;
+DROP TABLE IF EXISTS course;
+DROP TABLE IF EXISTS question;
+DROP TABLE IF EXISTS result;
+DROP TABLE IF EXISTS authorization;
+DROP TABLE IF EXISTS state;
+
+CREATE TABLE account(
+	account_id INTEGER NOT NULL AUTO_INCREMENT,
+	registration_id	VARCHAR(128),
+	first_name	VARCHAR(128),
+	middle_name	VARCHAR(128),
+	last_name	VARCHAR(128),
+	password VARCHAR(128),
+	account_role INTEGER,
+	PRIMARY KEY(account_id),
+	INDEX (registration_id)
+	)ENGINE = INNODB CHARACTER SET=utf8;
+
+CREATE TABLE course(
+	course_id INTEGER NOT NULL AUTO_INCREMENT,
+	course_name VARCHAR(128),
+	course_code	VARCHAR(128),
+	account_id INTEGER,
+	PRIMARY KEY(course_id),
+	CONSTRAINT FOREIGN KEY (account_id) REFERENCES account(account_id) ON UPDATE CASCADE ON DELETE CASCADE,
+	INDEX (course_code)
+	)ENGINE = INNODB CHARACTER SET=utf8;
+
+
+CREATE TABLE question(
+	question_id INTEGER NOT NULL AUTO_INCREMENT,
+	question_content VARCHAR(256),
+	question_type INTEGER,
+	question_option VARCHAR(256),
+	question_answer VARCHAR(256),
+	question_score INTEGER,
+	course_id INTEGER,
+	PRIMARY KEY(question_id),
+	CONSTRAINT FOREIGN KEY (course_id) REFERENCES course(course_id) ON UPDATE CASCADE ON DELETE CASCADE
+	)ENGINE = INNODB CHARACTER SET=utf8;
+
+CREATE TABLE result(
+	result_id INTEGER NOT NULL AUTO_INCREMENT,
+	result_score INTEGER,
+	course_id INTEGER,
+	account_id INTEGER,
+	PRIMARY KEY(result_id),
+	CONSTRAINT FOREIGN KEY (course_id) REFERENCES course(course_id) ON UPDATE CASCADE ON DELETE CASCADE,
+	CONSTRAINT FOREIGN KEY (account_id) REFERENCES account(account_id) ON UPDATE CASCADE ON DELETE CASCADE
+	)ENGINE = INNODB CHARACTER SET=utf8;
+
+CREATE TABLE authorization(
+	authorization_id INTEGER NOT NULL AUTO_INCREMENT,
+	account_id INTEGER,
+	course_id INTEGER,
+	PRIMARY KEY (authorization_id),
+	CONSTRAINT FOREIGN KEY (account_id) REFERENCES account (account_id) ON UPDATE CASCADE ON DELETE CASCADE,
+	CONSTRAINT FOREIGN KEY (course_id) REFERENCES course (course_id) ON UPDATE CASCADE ON DELETE CASCADE
+	)ENGINE = INNODB CHARACTER SET=utf8;
+
+CREATE TABLE state(
+    state_id INTEGER NOT NULL AUTO_INCREMENT,
+    status INTEGER,
+    course_id INTEGER,
+    PRIMARY KEY (state_id),
+    CONSTRAINT FOREIGN KEY (course_id) REFERENCES course (course_id) ON DELETE CASCADE ON UPDATE CASCADE
+    ) ENGINE = INNODB CHARACTER SET = utf8;
+
+
+/* ADD A DEFAULT ADMINISTRATOR registration id - admin001 and password - 123456789 */
+
+INSERT INTO account (registration_id, first_name, middle_name, last_name, password, account_role) VALUES ('admin001', 'john', 'admin', 'doe', '25f9e794323b453885f5181f1b624d0b', 3);
