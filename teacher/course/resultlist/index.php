@@ -19,4 +19,12 @@ if  ( $_SESSION['account_role'] != 2)
 }
 
 /////////////////////////////////////////
-print_r($_GET);
+
+?>
+
+<?php include "../../../general/header.php"; ?>
+<main>
+	<h2>Result</h2>
+	<p><a href="../../../teacher/course?course_name=<?=urlencode($_GET['course_name']);?>&course_code=<?=urlencode($_GET['course_code']);?>&course_id=<?=urlencode($_GET['course_id']);?>">Go back</a></p>
+	<?php displayResults($_GET['course_id']); ?>
+</main>

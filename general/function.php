@@ -717,12 +717,27 @@ function addAuthorization($regid, $course_id)
 			else
 			{
 				$account_id = $row1['account_id'];
-				$sql2 = "INSERT INTO authorization ( account_id, course_id ) VALUES ( :account_id, :course_id )";
-				$stmt2 = $pdo->prepare( $sql2 );
+
+				$sql2 = "SELECT * FROM authorization WHERE account_id = :account_id AND course_id = :course_id";
+				$stmt2 = $pdo->prepare($sql2);
 				$stmt2->execute( array(
 					':account_id' => $account_id,
 					':course_id' => $course_id
 				));
+				$row2 = $stmt2->fetch( PDO::FETCH_ASSOC);
+				if ( $row2)
+				{
+					return "Student has been added already";
+				}
+				else
+				{
+					$sql3 = "INSERT INTO authorization ( account_id, course_id ) VALUES ( :account_id, :course_id )";
+					$stmt3 = $pdo->prepare( $sql3 );
+					$stmt3->execute( array(
+						':account_id' => $account_id,
+						':course_id' => $course_id
+					));	
+				}
 			}
 		}
 	}
@@ -740,5 +755,46 @@ function flashMessageAddAuthorization()
 		echo '<div style="color: green;">'.$_SESSION['addAuthSuccess']."</div>";
 		unset($_SESSION['addAuthSuccess']);
 	}
+}
+
+function displayResults($course_id)
+{
+	include "pdo.php";
+
+	$sql1 = "SELECT * FROM result where course_id = :course_id";
+	$stmt1 = $pdo->prepare( $sql1 );
+	$stmt1->execute( array(
+		':course_id' => $course_id
+	));
+	
+	echo '<table border="1">';
+	echo '<th>Registration ID</th>';
+	echo '<th>Name</th>';
+	echo '<th>Score</th>';
+	while( $row1 = $stmt1->fetch( PDO::FETCH_ASSOC ) )
+	{
+		$sql2 = "SELECT * FROM account WHERE account_id = :account_id";
+		$stmt2 = $pdo->prepare( $sql2 );
+		$stmt2->execute( array(
+			':account_id' => $row1['account_id']
+		));
+		$row2 = $stmt2->fetch( PDO::FETCH_ASSOC );
+		$regid = 'N/A';
+		$name = 'N/A';
+		if( $row2 )
+		{
+			$regid = $row2['registration_id'];
+			$name = $row2['first_name']." ".$row2['middle_name']." ".$row2['last_name'];
+		}
+
+		echo '<tr><td>';
+		echo $regid;
+		echo '</td><td>';
+		echo $name;
+		echo '</td><td>';
+		echo $row1['result_score'];
+		echo '</td></tr>';
+	}
+	echo '</table>';
 }
 ?>
