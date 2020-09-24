@@ -49,7 +49,7 @@ if( isset( $_POST['add_auth']))
 <main>
 	<p><a href="../../../teacher/course?course_name=<?=urlencode($_GET['course_name']);?>&course_code=<?=urlencode($_GET['course_code']);?>&course_id=<?=urlencode($_GET['course_id']);?>">Go back</a></p>
 	<h4>List of Students Allowed To Take Exam</h4>
-	<?= displayListOfStudents($_GET['course_id']); ?>
+	<?= displayListOfStudents( $_GET['course_id'] ); ?>
 	<h4>Add New Student To List</h4>
 	<p><?= flashMessageAddAuthorization(); ?></p>
 	<form method="post">

@@ -24,7 +24,8 @@ if  ( $_SESSION['account_role'] != 2)
 
 <?php include "../../../general/header.php"; ?>
 <main>
-	<h2>Result</h2>
+	<h2>Results</h2>
+	<p>Site is still under construction.......</p>
 	<p><a href="../../../teacher/course?course_name=<?=urlencode($_GET['course_name']);?>&course_code=<?=urlencode($_GET['course_code']);?>&course_id=<?=urlencode($_GET['course_id']);?>">Go back</a></p>
 	<?php displayResults($_GET['course_id']); ?>
 </main>
