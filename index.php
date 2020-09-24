@@ -33,7 +33,7 @@ if( isset($_POST['login']))
 			<label for="psw"><b>Password</b></label>
 			<input type="password" name="password" placeholder="Enter password">
 			<p><?php flashMessage(); ?></p>
-			<button type="submit" name="login">Login</button>
+			<input class="submitlogin" type="submit" name="login" value="Login">
 		</div>
 	</form>
 </div>

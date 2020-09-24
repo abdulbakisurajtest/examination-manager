@@ -663,10 +663,16 @@ function displayListOfStudents($course_id)
 			$stmt2->execute( array(
 				':account_id' => $account_id
 			));
+			$full_name = "N/A";
+			$regid = "N/A";
+			$auth_id = "N/A";
 			$row2 = $stmt2->fetch( PDO::FETCH_ASSOC);
-			$full_name = $row2['first_name']." ".$row2['middle_name']." ".$row2['last_name'];
-			$regid = $row2['registration_id'];
-			$auth_id = $row['authorization_id'];
+			if( $row2 )
+			{
+				$full_name = htmlentities( $row2['first_name']." ".$row2['middle_name']." ".$row2['last_name'] );
+				$regid = htmlentities( $row2['registration_id'] );
+				$auth_id = htmlentities( $row['authorization_id'] );
+			}
 			echo "<tr><td>";
 			echo $regid;
 			echo "</td><td>";
@@ -757,7 +763,7 @@ function flashMessageAddAuthorization()
 	}
 }
 
-function displayResults($course_id)
+function displayResults( $course_id )
 {
 	include "pdo.php";
 
@@ -784,7 +790,7 @@ function displayResults($course_id)
 		if( $row2 )
 		{
 			$regid = $row2['registration_id'];
-			$name = $row2['first_name']." ".$row2['middle_name']." ".$row2['last_name'];
+			$name = htmlentities( $row2['first_name'] )." ".htmlentities( $row2['middle_name'] )." ".htmlentities( $row2['last_name'] );
 		}
 
 		echo '<tr><td>';
