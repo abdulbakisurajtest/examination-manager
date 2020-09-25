@@ -1,5 +1,3 @@
-<!--This file contains all functions used in the application -->
-
 <?php
 
 function loginAuthentication($regid, $pwd)
