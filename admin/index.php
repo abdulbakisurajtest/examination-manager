@@ -100,6 +100,9 @@ if ( isset($_POST['reset']))
 			</form>
 		</div>
 	</div>
+	<div class="admin-dash-item">
+		<p><a href="displaylect.php"><strong>List of registered lecturers</strong></a></p>
+	</div>
 </div>
 <br><br>
 <p><a href="../general/logout.php">Logout</a></p>

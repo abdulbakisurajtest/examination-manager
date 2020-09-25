@@ -801,4 +801,54 @@ function displayResults( $course_id )
 	}
 	echo '</table>';
 }
+
+function displayTeacherForAdmin()
+{
+	include "pdo.php";
+
+	$sql1 = "SELECT * FROM account where account_role = :account_role";
+	$stmt1 = $pdo->prepare( $sql1 );
+	$stmt1->execute( array(
+		':account_role' => 2
+	));
+	
+	echo '<table border="1">';
+	echo '<th>s/n</th>';
+	echo '<th>Name</th>';
+	echo '<th>Registration ID</th>';
+	echo '<th>Courses Created</th>';
+	
+	$sn = 1;
+	
+	while( $row1 = $stmt1->fetch( PDO::FETCH_ASSOC ) )
+	{
+		$regid = 'N/A';
+		$name = 'N/A';
+		$courses = 0;
+		$sql2 = "SELECT * FROM course where account_id = :account_id";
+		$stmt2 = $pdo->prepare( $sql2 );
+		$stmt2->execute( array(
+			':account_id' => $row1['account_id']
+		));
+		while( $row2 = $stmt2->fetch( PDO::FETCH_ASSOC ) )
+		{
+			$courses += 1;
+		}
+
+		$regid = $row1['registration_id'];
+		$name = htmlentities( $row1['first_name'] )." ".htmlentities( $row1['middle_name'] )." ".htmlentities( $row1['last_name'] );
+		echo '<tr style="text-align: center;"><td>';
+		echo $sn;
+		echo '</td><td>';
+		echo $name;
+		echo '</td><td>';
+		echo $regid;
+		echo '</td><td>';
+		echo $courses;
+		echo '</td></tr>';
+
+		$sn += 1;
+	}
+	echo '</table>';
+}
 ?>

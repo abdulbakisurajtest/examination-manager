@@ -1,4 +1,5 @@
 <?php
+
 $host = 'localhost';
 $dbname = 'questiontest';
 $port = '3306';
