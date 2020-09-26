@@ -57,20 +57,22 @@ if ( isset ($_POST['direction']))
 
 ?>
 
-<!--	VIEW START	-->
-
 <?php include "../general/header.php"; ?>
 <h2>Password Change</h2>
-<form method="POST">
-	<?= flashMessagePwdChange(); ?>
-	Enter old password
-	<input type="password" name="oldpwd" placeholder="enter old password" required>
-	Enter new password
-	<input type="password" name="newpwd" placeholder="enter new password" required>
-	Retype new password
-	<input type="password" name="repnewpwd" placeholder="enter new password again" required>
-	<button type="submit" name="pwdChange">Change</button>
-</form>
 <form method="post">
-	<p><button type="submit" name="direction">Go back</button></p>
+	<?= flashMessagePwdChange(); ?>
+	<label>
+		Enter old password<br/>
+		<input type="password" name="oldpwd">
+	</label><br/>
+	<label>
+		Enter new password<br/>
+		<input type="password" name="newpwd">
+	</label><br/>
+	<label>
+		Retype new password<br/>
+		<input type="password" name="repnewpwd">
+	</label><br/>
+	<input type="submit" name="pwdChange" value="Change">
+	<input type="submit" name="direction" value="Cancel">
 </form>

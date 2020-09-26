@@ -43,12 +43,12 @@ function flashMessage()
 {
 	if ( isset($_SESSION['error']))
 	{
-		echo '<p style="color: red;">'.$_SESSION['error']."</p>";
+		echo '<div style="color: red;">'.$_SESSION['error']."</div>";
 		unset($_SESSION['error']);
 	}
 	if ( isset($_SESSION['success']))
 	{
-		echo '<p style="color: green;">'.$_SESSION['success']."</p>";
+		echo '<div style="color: green;">'.$_SESSION['success']."</div>";
 		unset($_SESSION['success']);
 	}
 }
@@ -93,12 +93,12 @@ function flashMessageAdd()
 {
 	if ( isset($_SESSION['adderror']))
 	{
-		echo '<p style="color: red;">'.$_SESSION['adderror']."</p>";
+		echo '<div style="color: red;">'.$_SESSION['adderror']."</div>";
 		unset($_SESSION['adderror']);
 	}
 	if ( isset($_SESSION['addsuccess']))
 	{
-		echo '<p style="color: green;">'.$_SESSION['addsuccess']."</p>";
+		echo '<div style="color: green;">'.$_SESSION['addsuccess']."</div>";
 		unset($_SESSION['addsuccess']);
 	}
 }
@@ -266,7 +266,7 @@ function validatePassword($regid, $role, $oldpwd, $newpwd1, $newpwd2)
 	include "pdo.php";
 	if ( empty($oldpwd) || empty($newpwd1) || empty($newpwd2))
 	{
-		return 'Password field must not be empty';
+		return 'All fields are required';
 	}
 	else if( (strlen($newpwd1) < 8) || (strlen($newpwd2) < 8) )
 	{

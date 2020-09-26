@@ -14,7 +14,8 @@ if($_SESSION['account_role'] != 3)
 	header('location: ../index.php');
 	return;
 }
-if( isset($_POST['deled']))
+
+if( isset($_POST['edit']))
 {
 	if( (isset($_POST['deled_account_role'])) && ($_POST['deled_account_role'] == 'none'))
 	{
@@ -22,7 +23,7 @@ if( isset($_POST['deled']))
 		header('location: ../admin/index.php');
 		return;
 	}
-	$status = delete_edit($_POST['deled_registration_id'], $_POST['deled_account_role'], $_POST['deled']);
+	$status = delete_edit($_POST['deled_registration_id'], $_POST['deled_account_role'], 'edit');
 	if ($status !== true)
 	{
 		$_SESSION['delederror'] = $status;
@@ -31,15 +32,28 @@ if( isset($_POST['deled']))
 	}
 	else
 	{
-		if ($_SESSION['deled_action'] === 'edit')
-		{
-			header('location: edit.php');
-			return;
-		}
-		else if ($_SESSION['deled_action'] === 'delete')
-		{
-			header('location: delete.php');
-			return;
-		}
+		header('location: edit.php');
+		return;
+	}
+}
+if( isset($_POST['delete']))
+{
+	if( (isset($_POST['deled_account_role'])) && ($_POST['deled_account_role'] == 'none'))
+	{
+		$_SESSION['delederror'] = 'Please select a valid account';
+		header('location: ../admin/index.php');
+		return;
+	}
+	$status = delete_edit($_POST['deled_registration_id'], $_POST['deled_account_role'], 'delete');
+	if ($status !== true)
+	{
+		$_SESSION['delederror'] = $status;
+		header('location: ../admin/index.php');
+		return;
+	}
+	else
+	{
+		header('location: delete.php');
+		return;
 	}
 }

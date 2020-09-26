@@ -22,18 +22,20 @@ if( isset($_POST['login']))
 }
 ?>
 
-<!--html header-->
 <?php include "general/header.php"; ?>
-<div class="login-form">
-	<form method="post" autocomplete="off">
-		<div class="login-form-container">
-			<h2>Login To Proceed</h2>
-			<label for="regid"><b>Registration ID</b></label>
-			<input type="text" name="registrationid" placeholder="Enter registration ID">
-			<label for="psw"><b>Password</b></label>
-			<input type="password" name="password" placeholder="Enter password">
-			<p><?php flashMessage(); ?></p>
-			<input class="submitlogin" type="submit" name="login" value="Login">
-		</div>
-	</form>
-</div>
+
+<form method="post" autocomplete="off">
+	<h2>Sign In</h2>
+	<label>
+		Registration ID<br/>
+		<input type="text" name="registrationid">
+	</label>
+	<br/>
+	<label>
+		Password<br/>
+		<input type="password" name="password">
+	</label>
+	<br/>
+	<?php flashMessage(); ?>
+	<input class="submitlogin" type="submit" name="login" value="Login">
+</form>

@@ -53,7 +53,8 @@ if (isset ($_POST['continue_delete']))
 		<li>Last Name: <?= htmlentities($_SESSION['deled_last_name']) ?></li>
 		<li>Registration ID: <?= htmlentities($_SESSION['deled_registration_id']) ?></li>
 	</ul>
-	<form method="post">
-		<input type="submit" name="cancel_delete" value="No">
-		<input type="submit" name="continue_delete" value="Yes">
-	</form>
+</p>
+<form method="post">
+	<input type="submit" name="cancel_delete" value="No">
+	<input type="submit" name="continue_delete" value="Yes">
+</form>

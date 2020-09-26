@@ -51,43 +51,54 @@ if(isset($_POST['account_role']))
 
 
 <?php include "../general/header.php";?>
+
 <h2>Add New Entry</h2>
+
 <?php flashMessage(); ?>
-<label for="add">
-	<form method="post">
-		<label for="firstname">
-			First name:<input type="text" name="firstname">
-		</label>
-		<label for="middlename">
-			Middle name:<input type="text" name="middlename">
-		</label>
-		<label for="lastname">
-			Surname/Last name:<input type="text" name="lastname">
-		</label>
-		<label for="registration_id">
-			Registration ID:<input type="text" name="registration_id">
-		</label>
-		<?php
-		if ( $_SESSION['add_role'] == 'admin')
-		{
-			?>
-			<input type="hidden" name="role" value="3">
-			<?php
-		}
-		if ( $_SESSION['add_role'] == 'teacher')
-		{
-			?>
-			<input type="hidden" name="role" value="2">
-			<?php
-		}
-		if ( $_SESSION['add_role'] == 'student')
-		{
-			?>
-			<input type="hidden" name="role" value="1">
-			<?php
-		}
+
+<form method="post">
+	<label>
+		First name<br/>
+		<input type="text" name="firstname">
+	</label>
+	<br/>
+	<label>
+		Middle name<br/>
+		<input type="text" name="middlename">
+	</label>
+	<br/>
+	<label>
+		Surname/Last name<br/>
+		<input type="text" name="lastname">
+	</label>
+	<br/>
+	<label>
+		Registration ID<br/>
+		<input type="text" name="registration_id">
+	</label>
+	<br/>
+	
+	<?php
+	if ( $_SESSION['add_role'] == 'admin')
+	{
 		?>
-		<input type="submit" name="add" value="Add">
-		<p><a href="../admin/index.php"><<< Back</a><p>
-	</form>
-</label>
+		<input type="hidden" name="role" value="3">
+		<?php
+	}
+	if ( $_SESSION['add_role'] == 'teacher')
+	{
+		?>
+		<input type="hidden" name="role" value="2">
+		<?php
+	}
+	if ( $_SESSION['add_role'] == 'student')
+	{
+		?>
+		<input type="hidden" name="role" value="1">
+		<?php
+	}
+	?>
+	
+	<input type="submit" name="add" value="Add">
+	<p><a href="../admin/index.php"><<< Back</a><p>
+</form>
