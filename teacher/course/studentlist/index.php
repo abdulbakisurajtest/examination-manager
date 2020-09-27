@@ -18,6 +18,16 @@ if  ( $_SESSION['account_role'] != 2)
 	return;
 }
 
+
+// ensure the required $_GET[''] values are set
+
+if ( !isset($_GET['course_name']) || !isset($_GET['course_code']) || !isset($_GET['course_id']))
+{
+	header('Location: ../../index.php');
+	return;
+}
+
+
 if ( isset($_POST['remove']))
 {
 	removeAuthorization($_POST['auth_id']);
@@ -47,13 +57,16 @@ if( isset( $_POST['add_auth']))
 
 <?php include "../../../general/header.php"; ?>
 <main>
+	<h2>List of Authorized Students</h2>
 	<p><a href="../../../teacher/course?course_name=<?=urlencode($_GET['course_name']);?>&course_code=<?=urlencode($_GET['course_code']);?>&course_id=<?=urlencode($_GET['course_id']);?>">Go back</a></p>
-	<h4>List of Students Allowed To Take Exam</h4>
 	<?= displayListOfStudents( $_GET['course_id'] ); ?>
-	<h4>Add New Student To List</h4>
+	<h3>Add New Student To List</h4>
 	<p><?= flashMessageAddAuthorization(); ?></p>
 	<form method="post">
-		<input type="text" name="authorize_regid" placeholder="enter registration id">
+		<label>
+			Registration ID<br/>
+			<input type="text" name="authorize_regid">
+		</label><br/>
 		<input type="submit" name="add_auth" value="Add"> 
 	</form>
 </main>

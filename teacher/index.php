@@ -23,26 +23,27 @@ if  ( $_SESSION['account_role'] != 2)
 
 <?php include "../general/header.php"; ?>
 	<main>
-		<p>
-			<?php echo "Welcome ".$_SESSION['first_name']." ".$_SESSION['middle_name']." ".$_SESSION['last_name']; ?>
-			<a style="float: right" href="../general/pwdchange.php">Change Password</a>
-		</p>
+		<h2>Lecturer Dashboard</h2>
+		<p><?php echo "Welcome ".$_SESSION['first_name']." ".$_SESSION['middle_name']." ".$_SESSION['last_name']; ?></p>
 		<p><strong>Site is still under construction................</strong></p>
-		<h4>Add new course</h4>
+		<p><a href="../general/pwdchange.php">Change Password</a></p>
+		<h3>Add new course</h3>
 		<form method="post" action="addcourse.php">
 			<?= flashMessageAddCourse(); ?>
-			Enter full course name
-			<input type="text" name="course_name"><br>
-			Enter course code
-			<input type="text" name="course_code"><br>
+			<label>
+				Enter full course name<br/>
+				<input type="text" name="course_name">
+			</label><br/>
+			<label>
+				Enter course code<br/>
+				<input type="text" name="course_code">
+			</label><br/>
 			<input type="hidden" name="regid" value="<?= $_SESSION['registration_id']; ?>">
-			<button type="submit" name="addcourse">Add</button>
+			<input type="submit" name="addcourse" value="Add">
 		</form>
-		<h4>List of courses created</h4>
+		<h3>List of courses created</h3>
 		<?= flashMessageDeleteCourse(); ?>
 		<?= flashMessageEditCourse(); ?>
 		<?= displayListOfCourses($_SESSION['registration_id']); ?>
 		<p><a href="../general/logout.php">Logout</a></p>
 	</main>
-</body>
-</html>

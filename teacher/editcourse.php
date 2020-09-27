@@ -46,14 +46,18 @@ if ( isset( $_POST['canceledit']))
 
 <?php include "../general/header.php"; ?>
 <main>
-	<h4>Edit Course: </h4>
+	<h3>Edit Course</h3>
 	<?= flashMessageEditCourse(); ?>
 	<form method="post">
-		Course name:
-		<input type="text" name="course_name" value="<?= htmlentities($_REQUEST['course_name']); ?>"><br>
-		Course code: 
-		<input type="text" name="course_code" value="<?= htmlentities($_REQUEST['course_code']); ?>"><br>
-		<button type="submit" name="confirmedit">Edit</button>
-		<button type="submit" name="canceledit">Cancel</button>
+		<label>
+			Course name<br/>
+			<input type="text" name="course_name" value="<?= htmlentities($_REQUEST['course_name']); ?>">
+		</label><br/>
+		<label>
+			Course code<br/>
+			<input type="text" name="course_code" value="<?= htmlentities($_REQUEST['course_code']); ?>">
+		</label><br/>
+		<input type="submit" name="confirmedit" value="Edit">
+		<input type="submit" name="canceledit" value="Cancel">
 	</form>
 </main>

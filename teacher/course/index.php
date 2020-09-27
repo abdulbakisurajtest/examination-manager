@@ -18,7 +18,13 @@ if  ( $_SESSION['account_role'] != 2)
 	return;
 }
 
-/////////////////////////////////////////
+// ensure the required $_GET[''] values are set
+
+if ( !isset($_GET['course_name']) || !isset($_GET['course_code']) || !isset($_GET['course_id']))
+{
+	header('Location: ../index.php');
+	return;
+}
 
 if ( isset($_POST['changestatus']))
 {
@@ -45,7 +51,6 @@ if ( isset($_POST['changestatus']))
 }
 ?>
 
-<?php ////////////////  view start ////////////// ?>
 
 <?php include "../../general/header.php"; ?>
 <main>
@@ -53,20 +58,19 @@ if ( isset($_POST['changestatus']))
 	<h4><?= strtoupper($_GET['course_name'])." - ".strtoupper($_GET['course_code']); ?></h4>
 	<ul>
 		<li>
-			<div style="text-decoration: underline;">Course availability</div>
-			Status: <?= courseAvailabityStatus($_GET['course_id']); ?><br>
+			Course Status: <?= courseAvailabityStatus($_GET['course_id']); ?><br>
 			<?= flashMessageChangeCourseStatus(); ?>
 			<form method="post">
 				<select name="status">
-					<option value="none">--set status--</option>
+					<option value="none">--change status--</option>
 					<option value="on"> online </option>
 					<option value="off"> offline </option>
-				</select>
-				<button type="submit" name="changestatus">Change</button>
+				</select><br/>
+				<input type="submit" name="changestatus" value="Change">
 			</form>
-		</li>
-		<li><a href="<?= 'studentlist?course_name='.urlencode($_GET['course_name'])."&course_code=".urlencode($_GET['course_code'])."&course_id=".urlencode($_GET['course_id']); ?>"> List of students </a></li>
-		<li><a href="<?= 'questionlist?course_name='.urlencode($_GET['course_name'])."&course_code=".urlencode($_GET['course_code'])."&course_id=".urlencode($_GET['course_id']); ?>"> View questions </a></li>
+		</li><br/>
+		<li><a href="<?= 'questionlist?course_name='.urlencode($_GET['course_name'])."&course_code=".urlencode($_GET['course_code'])."&course_id=".urlencode($_GET['course_id']); ?>"> View/Edit questions </a></li><br/>
+		<li><a href="<?= 'studentlist?course_name='.urlencode($_GET['course_name'])."&course_code=".urlencode($_GET['course_code'])."&course_id=".urlencode($_GET['course_id']); ?>"> List of authorized students </a></li><br/>
 		<li><a href="<?= 'resultlist?course_name='.urlencode($_GET['course_name'])."&course_code=".urlencode($_GET['course_code'])."&course_id=".urlencode($_GET['course_id']); ?>"> View results </a></li>
 	</ul>
 </main>

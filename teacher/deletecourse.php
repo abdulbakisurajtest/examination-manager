@@ -47,14 +47,14 @@ if ( isset( $_POST['canceldelete']))
 
 <?php include "../general/header.php"; ?>
 <main>
-	<h4>Delete Course: </h4>
+	<h3>Delete Course</h3>
 	<p>
 		You are about to delete <strong><?= htmlentities($_REQUEST['course_name']); ?></strong> with course code <strong><?= htmlentities($_REQUEST['course_code']); ?></strong>?
 	</p>
 	<form method="post">
 		<input type="hidden" name="course_name" value="<?= htmlentities($_REQUEST['course_name']); ?>">
 		<input type="hidden" name="course_code" value="<?= htmlentities($_REQUEST['course_code']); ?>">
-		<button type="submit" name="confirmdelete">Delete</button>
-		<button type="submit" name="canceldelete">Cancel</button>
+		<input type="submit" name="confirmdelete" value="Delete">
+		<input type="submit" name="canceldelete" value="Cancel">
 	</form>
 </main>

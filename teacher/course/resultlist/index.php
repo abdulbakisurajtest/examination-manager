@@ -20,6 +20,14 @@ if  ( $_SESSION['account_role'] != 2)
 
 /////////////////////////////////////////
 
+// ensure the required $_GET[''] values are set
+
+if ( !isset($_GET['course_name']) || !isset($_GET['course_code']) || !isset($_GET['course_id']))
+{
+	header('Location: ../../index.php');
+	return;
+}
+
 ?>
 
 <?php include "../../../general/header.php"; ?>
