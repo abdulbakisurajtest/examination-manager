@@ -436,7 +436,7 @@ function displayListOfCourses($regid)
 			echo "</td><td>";
 			echo htmlentities($row['course_code']);
 			echo "</td><td>";
-			echo "<a href='course?course_name=".htmlentities($row['course_name'])."&course_code=".htmlentities($row['course_code'])."&course_id=".htmlentities($row['course_id'])."'>Open</a>";
+			echo "<a href='course?course_name=".htmlentities($row['course_name'])."&course_code=".htmlentities($row['course_code'])."'>Open</a>";
 			echo " | ";
 			echo "<a href='editcourse.php?course_name=".htmlentities($row['course_name'])."&course_code=".htmlentities($row['course_code'])."'>Edit</a>";
 			echo " | ";
@@ -536,9 +536,16 @@ function flashMessageEditCourse()
 	}
 }
 
-function courseAvailabityStatus($course_id)
+function courseAvailabityStatus( $course_name, $course_code )
 {
 	include "pdo.php";
+
+	$course_id = getCourseId( $course_name, $course_code);
+	if( $course_id == 'empty')
+	{
+		return '<span style="color: red;">invalid course</span>';
+	}
+
 	$sql = "SELECT * FROM state WHERE course_id = :course_id";
 		$stmt = $pdo->prepare($sql);
 		$stmt->execute( array(
@@ -562,7 +569,7 @@ function courseAvailabityStatus($course_id)
 		}
 }
 
-function changeCourseStatus($course_id, $course_status)
+function changeCourseStatus($course_name, $course_code, $course_status)
 {
 	include "pdo.php";
 	if ( $course_status == 'none')
@@ -583,6 +590,12 @@ function changeCourseStatus($course_id, $course_status)
 		else
 		{
 			$status = 3;
+		}
+
+		$course_id = getCourseId( $course_name, $course_code);
+		if( $course_id == 'empty')
+		{
+			return 'Course not found';
 		}
 
 		$sql1 = "SELECT * FROM state WHERE course_id = :course_id";
@@ -634,9 +647,16 @@ function flashMessageChangeCourseStatus()
 	}
 }
 
-function displayListOfStudents($course_id)
+function displayListOfStudents( $course_name, $course_code )
 {
 	include "pdo.php";
+
+	$course_id = getCourseId( $course_name, $course_code );
+	if( $course_id == 'empty' )
+	{
+		return '<div style="color: red;">invalid course</div>';
+	}
+
 	$getId = $course_id;
 	if($getId == 'error')
 	{
@@ -693,9 +713,16 @@ function removeAuthorization($auth_id)
 	$stmt->execute( array(
 		':authorization_id'=>$auth_id));
 }
-function addAuthorization($regid, $course_id)
+function addAuthorization($regid, $course_name, $course_code)
 {
 	include "pdo.php";
+
+	$course_id = getCourseId( $course_name, $course_code );
+	if( $course_id == 'empty')
+	{
+		return 'invalid course';
+	}
+
 	if( empty($regid) )
 	{
 		return "registration id cannot be empty";
@@ -761,9 +788,15 @@ function flashMessageAddAuthorization()
 	}
 }
 
-function displayResults( $course_id )
+function displayResults( $course_name, $course_code )
 {
 	include "pdo.php";
+
+	$course_id = getCourseId( $course_name, $course_code );
+	if( $course_id == 'empty' )
+	{
+		return '<div style = "color: red;">invalid course</div>';
+	}
 
 	$sql1 = "SELECT * FROM result where course_id = :course_id";
 	$stmt1 = $pdo->prepare( $sql1 );
@@ -850,5 +883,26 @@ function displayTeacherForAdmin()
 		$sn += 1;
 	}
 	echo '</table>';
+}
+
+function getCourseId($course_name, $course_code)
+{
+	include "pdo.php";
+
+	$sql1 = "SELECT * FROM course WHERE course_name = :course_name AND course_code = :course_code";
+	$stmt1 = $pdo->prepare( $sql1 );
+	$stmt1->execute( array(
+		':course_name' => $course_name,
+		':course_code' => $course_code
+	));
+	$row1 = $stmt1->fetch( PDO::FETCH_ASSOC );
+	if( !$row1 )
+	{
+		return 'empty';
+	}
+	else
+	{
+		return $row1['course_id'];
+	}
 }
 ?>

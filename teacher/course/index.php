@@ -20,7 +20,7 @@ if  ( $_SESSION['account_role'] != 2)
 
 // ensure the required $_GET[''] values are set
 
-if ( !isset($_GET['course_name']) || !isset($_GET['course_code']) || !isset($_GET['course_id']))
+if ( !isset($_GET['course_name']) || !isset($_GET['course_code']) )
 {
 	header('Location: ../index.php');
 	return;
@@ -28,23 +28,23 @@ if ( !isset($_GET['course_name']) || !isset($_GET['course_code']) || !isset($_GE
 
 if ( isset($_POST['changestatus']))
 {
-	$changestatus = changeCourseStatus( $_GET['course_id'], $_POST['status']);
+	$changestatus = changeCourseStatus( $_GET['course_name'], $_GET['course_code'], $_POST['status']);
 	if( $changestatus == 'online')
 	{
 		$_SESSION['changeCourseStatusOnline'] = 'Course is now online';
-		header('Location: index.php?course_name='.urlencode($_GET['course_name'])."&course_code=".urlencode($_GET['course_code'])."&course_id=".urlencode($_GET['course_id']));
+		header('Location: index.php?course_name='.urlencode($_GET['course_name'])."&course_code=".urlencode($_GET['course_code']));
 		return;
 	}
 	elseif ( $changestatus == 'offline')
 	{
 		$_SESSION['changeCourseStatusOffline'] = 'Course is now offline';
-		header('Location: index.php?course_name='.urlencode($_GET['course_name'])."&course_code=".urlencode($_GET['course_code'])."&course_id=".urlencode($_GET['course_id']));
+		header('Location: index.php?course_name='.urlencode($_GET['course_name'])."&course_code=".urlencode($_GET['course_code']));
 		return;
 	}
 	else
 	{
 		$_SESSION['changeCourseStatusError'] = $changestatus;
-		header('Location: index.php?course_name='.urlencode($_GET['course_name'])."&course_code=".urlencode($_GET['course_code'])."&course_id=".urlencode($_GET['course_id']));
+		header('Location: index.php?course_name='.urlencode($_GET['course_name'])."&course_code=".urlencode($_GET['course_code']));
 		return;
 		return;
 	}
@@ -58,7 +58,7 @@ if ( isset($_POST['changestatus']))
 	<h4><?= strtoupper($_GET['course_name'])." - ".strtoupper($_GET['course_code']); ?></h4>
 	<ul>
 		<li>
-			Course Status: <?= courseAvailabityStatus($_GET['course_id']); ?><br>
+			Course Status: <?= courseAvailabityStatus( $_GET['course_name'], $_GET['course_code']); ?><br>
 			<?= flashMessageChangeCourseStatus(); ?>
 			<form method="post">
 				<select name="status">
@@ -69,8 +69,8 @@ if ( isset($_POST['changestatus']))
 				<input type="submit" name="changestatus" value="Change">
 			</form>
 		</li><br/>
-		<li><a href="<?= 'questionlist?course_name='.urlencode($_GET['course_name'])."&course_code=".urlencode($_GET['course_code'])."&course_id=".urlencode($_GET['course_id']); ?>"> View/Edit questions </a></li><br/>
-		<li><a href="<?= 'studentlist?course_name='.urlencode($_GET['course_name'])."&course_code=".urlencode($_GET['course_code'])."&course_id=".urlencode($_GET['course_id']); ?>"> List of authorized students </a></li><br/>
-		<li><a href="<?= 'resultlist?course_name='.urlencode($_GET['course_name'])."&course_code=".urlencode($_GET['course_code'])."&course_id=".urlencode($_GET['course_id']); ?>"> View results </a></li>
+		<li><a href="<?= 'questionlist?course_name='.urlencode($_GET['course_name'])."&course_code=".urlencode($_GET['course_code']); ?>"> View/Edit questions </a></li><br/>
+		<li><a href="<?= 'studentlist?course_name='.urlencode($_GET['course_name'])."&course_code=".urlencode($_GET['course_code']); ?>"> List of authorized students </a></li><br/>
+		<li><a href="<?= 'resultlist?course_name='.urlencode($_GET['course_name'])."&course_code=".urlencode($_GET['course_code']); ?>"> View results </a></li>
 	</ul>
 </main>

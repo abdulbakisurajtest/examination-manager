@@ -22,7 +22,7 @@ if  ( $_SESSION['account_role'] != 2)
 
 // ensure the required $_GET[''] values are set
 
-if ( !isset($_GET['course_name']) || !isset($_GET['course_code']) || !isset($_GET['course_id']))
+if ( !isset($_GET['course_name']) || !isset($_GET['course_code']) )
 {
 	header('Location: ../../index.php');
 	return;
@@ -35,5 +35,5 @@ if ( !isset($_GET['course_name']) || !isset($_GET['course_code']) || !isset($_GE
 <main>
 	<h2>QUESTIONS</h2>
 	<p>Site is still under construction.......</p>
-	<p><a href="../../../teacher/course?course_name=<?=urlencode($_GET['course_name']);?>&course_code=<?=urlencode($_GET['course_code']);?>&course_id=<?=urlencode($_GET['course_id']);?>">Go back</a></p>
+	<p><a href="../../../teacher/course?course_name=<?=urlencode($_GET['course_name']);?>&course_code=<?=urlencode($_GET['course_code']);?>">Go back</a></p>
 </main>

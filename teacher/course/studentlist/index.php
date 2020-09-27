@@ -21,7 +21,7 @@ if  ( $_SESSION['account_role'] != 2)
 
 // ensure the required $_GET[''] values are set
 
-if ( !isset($_GET['course_name']) || !isset($_GET['course_code']) || !isset($_GET['course_id']))
+if ( !isset($_GET['course_name']) || !isset($_GET['course_code']) )
 {
 	header('Location: ../../index.php');
 	return;
@@ -31,23 +31,23 @@ if ( !isset($_GET['course_name']) || !isset($_GET['course_code']) || !isset($_GE
 if ( isset($_POST['remove']))
 {
 	removeAuthorization($_POST['auth_id']);
-	header('Location: ../studentlist?course_name='.urlencode($_GET['course_name'])."&course_code=".urlencode($_GET['course_code'])."&course_id=".urlencode($_GET['course_id']) );
+	header( 'Location: ../studentlist?course_name='.urlencode($_GET['course_name'])."&course_code=".urlencode($_GET['course_code']) );
 	return;
 }
 
 if( isset( $_POST['add_auth']))
 {
-	$add_auth = addAuthorization( $_POST['authorize_regid'], $_GET['course_id']);
+	$add_auth = addAuthorization( $_POST['authorize_regid'], $_GET['course_name'], $_GET['course_code']);
 	if( $add_auth == 'success')
 	{
 		$_SESSION['addAuthSuccess'] = 'Student added';
-		header('Location: ../studentlist?course_name='.urlencode($_GET['course_name'])."&course_code=".urlencode($_GET['course_code'])."&course_id=".urlencode($_GET['course_id']) );
+		header( 'Location: ../studentlist?course_name='.urlencode($_GET['course_name'])."&course_code=".urlencode($_GET['course_code']) );
 		return;
 	}
 	else
 	{
 		$_SESSION['addAuthError'] = $add_auth;
-		header('Location: ../studentlist?course_name='.urlencode($_GET['course_name'])."&course_code=".urlencode($_GET['course_code'])."&course_id=".urlencode($_GET['course_id']) );
+		header( 'Location: ../studentlist?course_name='.urlencode($_GET['course_name'])."&course_code=".urlencode($_GET['course_code']) );
 		return;
 	}
 }
@@ -58,10 +58,10 @@ if( isset( $_POST['add_auth']))
 <?php include "../../../general/header.php"; ?>
 <main>
 	<h2>List of Authorized Students</h2>
-	<p><a href="../../../teacher/course?course_name=<?=urlencode($_GET['course_name']);?>&course_code=<?=urlencode($_GET['course_code']);?>&course_id=<?=urlencode($_GET['course_id']);?>">Go back</a></p>
-	<?= displayListOfStudents( $_GET['course_id'] ); ?>
+	<p><a href="../../../teacher/course?course_name=<?=urlencode($_GET['course_name']);?>&course_code=<?=urlencode($_GET['course_code']);?>">Go back</a></p>
+	<?= displayListOfStudents( $_GET['course_name'], $_GET['course_code'] ); ?>
 	<h3>Add New Student To List</h4>
-	<p><?= flashMessageAddAuthorization(); ?></p>
+	<?= flashMessageAddAuthorization(); ?>
 	<form method="post">
 		<label>
 			Registration ID<br/>
