@@ -1,6 +1,6 @@
 <?php
-require_once "../general/pdo.php";
-require_once "../general/function.php";
+require_once "../includes/pdo.php";
+require_once "../includes/function.php";
 session_start();
 
 if($_SESSION['account_role'] != 3)
@@ -43,7 +43,7 @@ if (isset ($_POST['continue_delete']))
 }
 ?>
 
-<?php include "../general/header.php"; ?>
+<?php include "../includes/header.php"; ?>
 <h2>Delete Confirmation:</h2>
 <p>
 	Do you want to delete user account with the following details?

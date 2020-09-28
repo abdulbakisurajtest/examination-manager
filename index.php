@@ -2,15 +2,15 @@
 
 session_start();
 
-require_once "general/pdo.php";
-require_once "general/function.php";
+require_once "includes/pdo.php";
+require_once "includes/function.php";
 
 if( isset($_POST['login']))
 {
 	$auth = loginAuthentication($_POST['registrationid'], $_POST['password']);
 	if ($auth === true)
 	{
-		header('location: general/login.php');
+		header('location: includes/login.php');
 		return;
 	}
 	else
@@ -22,7 +22,7 @@ if( isset($_POST['login']))
 }
 ?>
 
-<?php include "general/header.php"; ?>
+<?php include "includes/header.php"; ?>
 
 <form method="post" autocomplete="off">
 	<h2>Sign In</h2>

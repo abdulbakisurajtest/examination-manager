@@ -1,6 +1,6 @@
 <?php
-require_once "../general/pdo.php";
-require_once "../general/function.php";
+require_once "../includes/pdo.php";
+require_once "../includes/function.php";
 session_start();
 
 if ( !isset( $_SESSION['registration_id']))
@@ -50,7 +50,7 @@ if(isset($_POST['account_role']))
 ?>
 
 
-<?php include "../general/header.php";?>
+<?php include "../includes/header.php";?>
 
 <h2>Add New Entry</h2>
 

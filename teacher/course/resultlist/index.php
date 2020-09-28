@@ -1,7 +1,7 @@
 <?php
 session_start();
-require_once "../../../general/function.php";
-require_once "../../../general/pdo.php";
+require_once "../../../includes/function.php";
+require_once "../../../includes/pdo.php";
 
 // ensure session values are set and valid
 
@@ -30,7 +30,7 @@ if ( !isset($_GET['course_name']) || !isset($_GET['course_code']) )
 
 ?>
 
-<?php include "../../../general/header.php"; ?>
+<?php include "../../../includes/header.php"; ?>
 <main>
 	<h2>Results</h2>
 	<p>Site is still under construction.......</p>

@@ -1,6 +1,6 @@
 <?php
-require_once "../general/pdo.php";
-require_once "../general/function.php";
+require_once "../includes/pdo.php";
+require_once "../includes/function.php";
 
 session_start();
 
@@ -22,7 +22,7 @@ if  ( $_SESSION['account_role'] != 3)
 /////////////////////////////////////////
 ?>
 
-<?php include "../general/header.php"; ?>
+<?php include "../includes/header.php"; ?>
 <main>
 	<h2>List of Registered Lecturers</h2>
 	<p><a href="index.php">Go back</a></p>

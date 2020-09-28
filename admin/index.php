@@ -1,6 +1,6 @@
 <?php
-require_once "../general/pdo.php";
-require_once "../general/function.php";
+require_once "../includes/pdo.php";
+require_once "../includes/function.php";
 
 session_start();
 
@@ -40,12 +40,12 @@ if ( isset($_POST['reset']))
 }
 ?>
 
-<?php include "../general/header.php"; ?>
+<?php include "../includes/header.php"; ?>
 
 <h2>Administrator Dashboard</h2>
 <?= flashMessage(); ?>
 <?= "Welcome, ".strtoupper( $_SESSION['first_name']." ".$_SESSION['last_name']); ?>
-<p><a href="../general/pwdchange.php">Change my password</a></p>
+<p><a href="../includes/pwdchange.php">Change my password</a></p>
 <h3>Account</h3>
 <ul>
 	<li>
@@ -92,4 +92,4 @@ if ( isset($_POST['reset']))
 	</li>
 </ul>
 <p><a href="displaylect.php"><strong>View registered lecturers</strong></a></p>
-<p><a href="../general/logout.php">Logout</a></p>
+<p><a href="../includes/logout.php">Logout</a></p>

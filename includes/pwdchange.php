@@ -1,7 +1,7 @@
 <?php
 
-require_once "../general/pdo.php";
-require_once "../general/function.php";
+require_once "../includes/pdo.php";
+require_once "../includes/function.php";
 
 session_start();
 
@@ -29,7 +29,7 @@ if ( isset($_POST['pwdChange']))
 	{
 		$_SESSION['pwdchangeerror'] = $changePwd;
 	}
-	header('Location: ../general/pwdchange.php');
+	header('Location: ../includes/pwdchange.php');
 	return;
 }
 
@@ -49,7 +49,7 @@ if ( isset ($_POST['direction']))
 			return;
 			break;
 		default:
-			header('Location: ../general/logout.php');
+			header('Location: ../includes/logout.php');
 			return;
 			break;
 	}
@@ -57,7 +57,7 @@ if ( isset ($_POST['direction']))
 
 ?>
 
-<?php include "../general/header.php"; ?>
+<?php include "../includes/header.php"; ?>
 <h2>Password Change</h2>
 <form method="post">
 	<?= flashMessagePwdChange(); ?>

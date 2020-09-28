@@ -1,6 +1,6 @@
 <?php
-require_once "../general/pdo.php";
-require_once "../general/function.php";
+require_once "../includes/pdo.php";
+require_once "../includes/function.php";
 session_start();
 if ( !isset( $_SESSION['registration_id']))
 {

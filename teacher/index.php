@@ -1,7 +1,7 @@
 <?php
 session_start();
-require_once "../general/function.php";
-require_once "../general/pdo.php";
+require_once "../includes/function.php";
+require_once "../includes/pdo.php";
 
 // ensure session values are set and valid
 
@@ -21,12 +21,12 @@ if  ( $_SESSION['account_role'] != 2)
 /////////////////////////////////////////
 ?>
 
-<?php include "../general/header.php"; ?>
+<?php include "../includes/header.php"; ?>
 	<main>
 		<h2>Lecturer Dashboard</h2>
 		<p><?php echo "Welcome ".$_SESSION['first_name']." ".$_SESSION['middle_name']." ".$_SESSION['last_name']; ?></p>
 		<p><strong>Site is still under construction................</strong></p>
-		<p><a href="../general/pwdchange.php">Change Password</a></p>
+		<p><a href="../includes/pwdchange.php">Change Password</a></p>
 		<h3>Add new course</h3>
 		<form method="post" action="addcourse.php">
 			<?= flashMessageAddCourse(); ?>
@@ -45,5 +45,5 @@ if  ( $_SESSION['account_role'] != 2)
 		<?= flashMessageDeleteCourse(); ?>
 		<?= flashMessageEditCourse(); ?>
 		<?= displayListOfCourses($_SESSION['registration_id']); ?>
-		<p><a href="../general/logout.php">Logout</a></p>
+		<p><a href="../includes/logout.php">Logout</a></p>
 	</main>

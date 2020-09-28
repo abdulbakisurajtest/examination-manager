@@ -1,6 +1,6 @@
 <?php
-require_once "../general/pdo.php";
-require_once "../general/function.php";
+require_once "../includes/pdo.php";
+require_once "../includes/function.php";
 session_start();
 
 if($_SESSION['account_role'] != 3)
@@ -50,7 +50,7 @@ if (isset ($_POST['continue_edit']))
 ?>
 
 
-<?php include "../general/header.php"; ?>
+<?php include "../includes/header.php"; ?>
 <h2><?= htmlentities($_SESSION['deled_account_role_name']); ?> Account Edit</h2>
 <?= flashMessage(); ?>
 <form method="post" autocomplete="off">

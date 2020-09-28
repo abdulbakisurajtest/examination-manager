@@ -1,7 +1,7 @@
 <?php
 session_start();
-require_once "../general/function.php";
-require_once "../general/pdo.php";
+require_once "../includes/function.php";
+require_once "../includes/pdo.php";
 
 // ensure session values are set and valid
 
@@ -45,7 +45,7 @@ if ( isset( $_POST['canceldelete']))
 
 ?>
 
-<?php include "../general/header.php"; ?>
+<?php include "../includes/header.php"; ?>
 <main>
 	<h3>Delete Course</h3>
 	<p>

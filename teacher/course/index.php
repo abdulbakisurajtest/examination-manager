@@ -1,7 +1,7 @@
 <?php
 session_start();
-require_once "../../general/function.php";
-require_once "../../general/pdo.php";
+require_once "../../includes/function.php";
+require_once "../../includes/pdo.php";
 
 // ensure session values are set and valid
 
@@ -52,7 +52,7 @@ if ( isset($_POST['changestatus']))
 ?>
 
 
-<?php include "../../general/header.php"; ?>
+<?php include "../../includes/header.php"; ?>
 <main>
 	<p><a href="../../teacher/index.php">Go back</a></p>
 	<h4><?= strtoupper($_GET['course_name'])." - ".strtoupper($_GET['course_code']); ?></h4>

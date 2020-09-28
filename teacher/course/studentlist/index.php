@@ -1,7 +1,7 @@
 <?php
 session_start();
-require_once "../../../general/function.php";
-require_once "../../../general/pdo.php";
+require_once "../../../includes/function.php";
+require_once "../../../includes/pdo.php";
 
 // ensure session values are set and valid
 
@@ -55,7 +55,7 @@ if( isset( $_POST['add_auth']))
 /////////////////////////////////////////
 ?>
 
-<?php include "../../../general/header.php"; ?>
+<?php include "../../../includes/header.php"; ?>
 <main>
 	<h2>List of Authorized Students</h2>
 	<p><a href="../../../teacher/course?course_name=<?=urlencode($_GET['course_name']);?>&course_code=<?=urlencode($_GET['course_code']);?>">Go back</a></p>
