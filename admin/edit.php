@@ -54,9 +54,9 @@ if (isset ($_POST['continue_edit']))
 <h2><?= htmlentities($_SESSION['deled_account_role_name']); ?> Account Edit</h2>
 <?= flashMessage(); ?>
 <form method="post" autocomplete="off">
-	First Name: <input required type="text" name="first_name" value="<?= htmlentities($_SESSION['deled_first_name']); ?>"><br/>
-	Middle Name: <input type="text" name="middle_name" value="<?= htmlentities($_SESSION['deled_middle_name']); ?>" required><br/>
-	Last Name: <input type="text" name="last_name" value="<?= htmlentities($_SESSION['deled_last_name']); ?>" required><br/>
+	First Name: <input type="text" name="first_name" value="<?= htmlentities($_SESSION['deled_first_name']); ?>"><br/>
+	Middle Name: <input type="text" name="middle_name" value="<?= htmlentities($_SESSION['deled_middle_name']); ?>" ><br/>
+	Last Name: <input type="text" name="last_name" value="<?= htmlentities($_SESSION['deled_last_name']); ?>" ><br/>
 	<input type="submit" name="continue_edit" value="Update">
 	<input type="submit" name="cancel_edit" value="Cancel">
 </form>

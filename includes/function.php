@@ -57,7 +57,7 @@ function addNewUser($regid, $first, $middle, $last, $role)
 {
 	include "pdo.php";
 	$_SESSION['exists1'] = $regid;
-	if ( empty($regid) || empty($first) || empty($middle) || empty($last) || empty($role))
+	if ( empty($regid) || empty($first) || empty($last) || empty($role))
 	{
 		return "All fields are required";
 	}
@@ -170,7 +170,7 @@ function flashMessageDeled()
 function editUser($id, $first, $middle, $last)
 {
 	include "pdo.php";
-	if ( empty($id) || empty($first) || empty($middle) || empty($last))
+	if ( empty($id) || empty($first) || empty($last))
 	{
 		return "All fields are required";
 	}
